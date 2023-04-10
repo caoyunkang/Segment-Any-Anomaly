@@ -1,4 +1,4 @@
-![](./assets/SegmentAnyAnomaly_logo.png.png)
+![](./assets/SegmentAnyAnomaly_logo.png)
 # GroundedSAM-zero-shot-anomaly-detection
 This project aims to segment any anomaly without any training. We develop this interesting demo by combining [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and [Segment Anything](https://github.com/facebookresearch/segment-anything)! 
 Most of the codes are borrowed from [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything). Thanks to their excellent work!
