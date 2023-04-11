@@ -105,6 +105,8 @@ If you feel good about our work, there are some work you might be interested inï
 - [PFM, image anomaly detection](https://github.com/smiler96/PFM-and-PEFM-for-Image-Anomaly-Detection-and-Segmentation)
 - [GCPF, image anomaly detection](https://github.com/smiler96/GCPF)  
 - [CPMF, point cloud anomaly detection](https://github.com/caoyunkang/CPMF)
+- [awesome-industrial-anomaly-detection](https://github.com/M-3LAB/awesome-industrial-anomaly-detection)
+
 
 ## Citation
 If you find this project helpful for your research, please consider citing the following BibTeX entry.
