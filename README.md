@@ -97,6 +97,15 @@ python zero_shot_ad_demo.py \
 - [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything)
 
+## :Related Work
+If you feel good about our work, there are some work you might be interested in：
+
+- [IKD, image anomaly detection](https://github.com/caoyunkang/IKD)
+- [CDO, image anomaly detection](https://github.com/caoyunkang/CDO)
+- [PFM, image anomaly detection](https://github.com/smiler96/PFM-and-PEFM-for-Image-Anomaly-Detection-and-Segmentation)
+- [GCPF, image anomaly detection](https://github.com/smiler96/GCPF)  
+- [CPMF, point cloud anomaly detection](https://github.com/caoyunkang/CPMF)
+
 ## Citation
 If you find this project helpful for your research, please consider citing the following BibTeX entry.
 ```BibTex
