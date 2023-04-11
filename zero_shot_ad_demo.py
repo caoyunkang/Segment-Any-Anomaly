@@ -46,7 +46,7 @@ def load_model(model_config_path, model_checkpoint_path, device):
     return model
 
 
-def get_grounding_output(model, image, caption, box_threshold, text_threshold, with_logits=True, device="cpu", area_thr=0.8):
+def get_grounding_output(model, image, caption, box_threshold, text_threshold, category, with_logits=True, device="cpu", area_thr=0.8):
     caption = caption.lower()
     caption = caption.strip()
     if not caption.endswith("."):
@@ -64,22 +64,34 @@ def get_grounding_output(model, image, caption, box_threshold, text_threshold, w
     boxes_area = boxes_filt[:, 2] * boxes_filt[:, 3]
     filt_mask = torch.bitwise_and((logits_filt.max(dim=1)[0] > box_threshold), (boxes_area < area_thr))
 
-    logits_filt = logits_filt[filt_mask]  # num_filt, 256
-    boxes_filt = boxes_filt[filt_mask]  # num_filt, 4
+    if torch.sum(filt_mask) == 0: # in case there are no matches
+        filt_mask = torch.argmax(logits_filt.max(dim=1)[0])
+        logits_filt = logits_filt[filt_mask].unsqueeze(0)  # num_filt, 256
+        boxes_filt = boxes_filt[filt_mask].unsqueeze(0)
+    else:
+        logits_filt = logits_filt[filt_mask]  # num_filt, 256
+        boxes_filt = boxes_filt[filt_mask]  # num_filt, 4
 
     # get phrase
     tokenlizer = model.tokenizer
     tokenized = tokenlizer(caption)
+
     # build pred
     pred_phrases = []
+    boxes_filt_category = []
     for logit, box in zip(logits_filt, boxes_filt):
         pred_phrase = get_phrases_from_posmap(logit > text_threshold, tokenized, tokenlizer)
+        if pred_phrase.count(category) > 0: # we don't want to predict the category
+            continue
+
         if with_logits:
             pred_phrases.append(pred_phrase + f"({str(logit.max().item())[:4]})")
         else:
             pred_phrases.append(pred_phrase)
+        boxes_filt_category.append(box)
+    boxes_filt_category = torch.stack(boxes_filt_category, dim=0)
 
-    return boxes_filt, pred_phrases
+    return boxes_filt_category, pred_phrases
 
 def show_mask(mask, ax, random_color=True):
     if random_color:
@@ -108,15 +120,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "--sam_checkpoint", type=str, default='weights/sam_vit_h_4b8939.pth', help="path to checkpoint file"
     )
-    parser.add_argument("--input_image", type=str, default='assets/wood_demo.png', help="path to image file")
-    parser.add_argument("--text_prompt", type=str, default='defects', help="text prompt")
+    parser.add_argument("--input_image", type=str, default='assets/cable_demo.png', help="path to image file")
+    parser.add_argument("--category", type=str, default='cable')
+    parser.add_argument("--text_prompt", type=str, default='the black hole on the cable', help="text prompt")
     parser.add_argument(
         "--output_dir", "-o", type=str, default="outputs", help="output directory"
     )
 
     parser.add_argument("--box_threshold", type=float, default=0.15, help="box threshold")
     parser.add_argument("--text_threshold", type=float, default=0.15, help="text threshold")
-    parser.add_argument("--area_threshold", type=float, default=0.70, help="defect area threshold")
+    parser.add_argument("--area_threshold", type=float, default=0.9, help="defect area threshold")
 
     parser.add_argument("--device", type=str, default="cuda", help="running on cpu only!, default=False")
     args = parser.parse_args()
@@ -131,6 +144,7 @@ if __name__ == "__main__":
     box_threshold = args.box_threshold
     text_threshold = args.box_threshold
     area_threshold = args.area_threshold
+    category = args.category
     device = args.device
 
     # print(text_threshold)
@@ -146,7 +160,7 @@ if __name__ == "__main__":
 
     # run grounding dino model
     boxes_filt, pred_phrases = get_grounding_output(
-        model, image, text_prompt, box_threshold, text_threshold, device=device, area_thr=area_threshold
+        model, image, text_prompt, box_threshold, text_threshold, category=category, device=device, area_thr=area_threshold
     )
 
     # initialize SAM
