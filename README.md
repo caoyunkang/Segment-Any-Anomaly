@@ -96,7 +96,7 @@ python zero_shot_ad_demo.py \
 - The model prediction visualization will be saved in `output_dir`.
 
 
-## Todolist
+## :hammer:Todolist
 We will add following features in the near future...
 - [x] Detail the zero-shot anomaly detection framework.
 - [ ] Evaluate on other image anomaly detection datasets.
@@ -111,7 +111,7 @@ We will add following features in the near future...
 - [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything)
 
-## :Related Work
+## :fireworks:Related Work
 If you feel good about our work, there are some work you might be interested in：
 
 - [IKD, image anomaly detection](https://github.com/caoyunkang/IKD)
