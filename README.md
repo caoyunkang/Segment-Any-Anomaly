@@ -1,14 +1,17 @@
 ![](./assets/SegmentAnyAnomaly_logo.png)
+
 # GroundedSAM-zero-shot-anomaly-detection
-This project aims to segment any anomaly without any training. We develop this interesting demo by combining [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and [Segment Anything](https://github.com/facebookresearch/segment-anything)! 
+
+This project aims to segment any anomaly without any training. We develop this interesting demo by combining [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and [Segment Anything](https://github.com/facebookresearch/segment-anything)!
 Most of the codes are borrowed from [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything). Thanks to their excellent work!
 
-
 **Why this project?**
-- [Segment Anything](https://github.com/facebookresearch/segment-anything) is a strong segmentation model. But it need prompts (like boxes/points) to generate masks. 
-- [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) is a strong zero-shot detector which enable to generate high quality boxes and labels with free-form text. 
+
+- [Segment Anything](https://github.com/facebookresearch/segment-anything) is a strong segmentation model. But it need prompts (like boxes/points) to generate masks.
+- [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) is a strong zero-shot detector which enable to generate high quality boxes and labels with free-form text.
 - The combination of the two models enable to **detect and segment everything** with text inputs!
 - In real world industrial inspection applications, models trained with zero or few normal images, is essential in many cases as defects are rare with a wide range of variations.
+
 
 **How we do?**
 
@@ -16,15 +19,18 @@ We feed the origin image and anomaly specific description to Grouding DINO, and 
 strategies. Then the filtered bounding boxes are denoted as the prompts in SAM for final anomaly segmentation.
 ![](./assets/framework.png)
 
+
 **Imagine Space**
 
 Some possible avenues for future work ...
+
 - Stronger foundation models with segmentation pre-training.
 - Collaboration with (Chat-)GPT.
 - More advanced normality- and abnormality-specific prompts for better zero-shot anomaly detection performance.
 
 **Examples on the MVTec AD dataset**
 ![](./assets/demo_results.png)
+
 
 ## :fire: What's New 
 
@@ -40,13 +46,9 @@ Some possible avenues for future work ...
 
 
 
+## 🛠 Installation
 
-[comment]: <> (## :open_book: Notebook Demo)
-
-[comment]: <> (See our [notebook file]&#40;grounded_sam.ipynb&#41; as an example.)
-
-## :hammer_and_wrench: Installation
-The code requires `python>=3.8`, as well as `pytorch>=1.7` and `torchvision>=0.8`. Please follow the instructions [here](https://pytorch.org/get-started/locally/) to install both PyTorch and TorchVision dependencies. Installing both PyTorch and TorchVision with CUDA support is strongly recommended.
+The code requires `python>=3.8`, as well as `pytorch>=1.7` and `torchvision>=0.8`. Please follow the instructions [here](https://pytorch.org/get-started/locally/) to install both PyTorch and TorchVision dependencies. Installing both PyTorch and TorchVision with CUDA(>=11.1) support is strongly recommended.
 
 Install Segment Anything:
 
@@ -60,17 +62,18 @@ Install GroundingDINO:
 python -m pip install -e GroundingDINO
 ```
 
-
 The following optional dependencies are necessary for mask post-processing, saving masks in COCO format, the example notebooks, and exporting the model in ONNX format. `jupyter` is also required to run the example notebooks.
+
 ```
 pip install opencv-python pycocotools matplotlib onnxruntime onnx ipykernel
 ```
 
 More details can be found in [install segment anything](https://github.com/facebookresearch/segment-anything#installation) and [install GroundingDINO](https://github.com/IDEA-Research/GroundingDINO#install)
 
+## 🏃 Run Grounded-Segment-Anything Demo
 
-## :running_man: Run Grounded-Segment-Anything Demo
 - Download the checkpoint for segment-anything and grounding-dino:
+
 ```bash
 cd $ProjectRoot
 mkdir weights
@@ -80,6 +83,7 @@ wget https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alp
 ```
 
 - Run demo
+
 ```bash
 export CUDA_VISIBLE_DEVICES=0
 python zero_shot_ad_demo.py \
@@ -93,8 +97,19 @@ python zero_shot_ad_demo.py \
   --text_prompt "defects" \
   --device "cuda"
 ```
+
 - The model prediction visualization will be saved in `output_dir`.
 
+## 🏃 Run Grounded-Segment-Anything + Gradio APP
+
+```bash
+python gradio_zero_shot_ad_app.py
+```
+
+- The gradio app visulization as follow:
+![](./assets/gradio.png)
+
+## 💘 Acknowledgements
 
 ## :hammer:Todolist
 We will add following features in the near future...
@@ -107,23 +122,27 @@ We will add following features in the near future...
 
 
 ## :cupid: Acknowledgements
+
 - [segment-anything](https://github.com/facebookresearch/segment-anything)
 - [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything)
 
+
 ## :fireworks:Related Work
+
 If you feel good about our work, there are some work you might be interested in：
 
 - [IKD, image anomaly detection](https://github.com/caoyunkang/IKD)
 - [CDO, image anomaly detection](https://github.com/caoyunkang/CDO)
 - [PFM, image anomaly detection](https://github.com/smiler96/PFM-and-PEFM-for-Image-Anomaly-Detection-and-Segmentation)
-- [GCPF, image anomaly detection](https://github.com/smiler96/GCPF)  
+- [GCPF, image anomaly detection](https://github.com/smiler96/GCPF)
 - [CPMF, point cloud anomaly detection](https://github.com/caoyunkang/CPMF)
 - [awesome-industrial-anomaly-detection, survey of anomaly detection](https://github.com/M-3LAB/awesome-industrial-anomaly-detection)
 
-
 ## Citation
+
 If you find this project helpful for your research, please consider citing the following BibTeX entry.
+
 ```BibTex
 @article{kirillov2023segany,
   title={Segment Anything}, 
