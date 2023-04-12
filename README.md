@@ -12,6 +12,14 @@ Most of the codes are borrowed from [Grounded Segment Anything](https://github.c
 - The combination of the two models enable to **detect and segment everything** with text inputs!
 - In real world industrial inspection applications, models trained with zero or few normal images, is essential in many cases as defects are rare with a wide range of variations.
 
+
+**How we do?**
+
+We feed the origin image and anomaly specific description to Grouding DINO, and then filter the bouding boxes using several
+strategies. Then the filtered bounding boxes are denoted as the prompts in SAM for final anomaly segmentation.
+![](./assets/framework.png)
+
+
 **Imagine Space**
 
 Some possible avenues for future work ...
@@ -20,8 +28,23 @@ Some possible avenues for future work ...
 - Collaboration with (Chat-)GPT.
 - More advanced normality- and abnormality-specific prompts for better zero-shot anomaly detection performance.
 
-**More Examples**
+**Examples on the MVTec AD dataset**
 ![](./assets/demo_results.png)
+
+
+## :fire: What's New 
+
+- 🆕 Show the way of using anomaly specific prompts to detect anomalies more precise.
+
+[comment]: <> (  <img src="https://github.com/IDEA-Research/Grounded-Segment-Anything/blob/humanFace/assets/interactive-fashion-edit.png" width="500" height="260"/><img src="https://github.com/IDEA-Research/Grounded-Segment-Anything/blob/humanFace/assets/interactive-mark.gif" width="250" height="250"/>)
+
+
+
+[comment]: <> (- :new: Checkout our related human-face-edit branch [here]&#40;https://github.com/IDEA-Research/Grounded-Segment-Anything/tree/humanFace&#41;. We'll keep updating this branch with more interesting features. Here are some examples:)
+
+[comment]: <> (  ![]&#40;https://github.com/IDEA-Research/Grounded-Segment-Anything/blob/humanFace/assets/231-hair-edit.png&#41;)
+
+
 
 ## 🛠 Installation
 
@@ -88,11 +111,24 @@ python gradio_zero_shot_ad_app.py
 
 ## 💘 Acknowledgements
 
+## :hammer:Todolist
+We will add following features in the near future...
+- [x] Detail the zero-shot anomaly detection framework.
+- [ ] Evaluate on other image anomaly detection datasets.
+- [ ] Add video demo.
+- [ ] Add UI for easy evaluation.
+- [ ] Colab demo.
+- [ ] HuggingFace demo.
+
+
+## :cupid: Acknowledgements
+
 - [segment-anything](https://github.com/facebookresearch/segment-anything)
 - [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything)
 
-## :Related Work
+
+## :fireworks:Related Work
 
 If you feel good about our work, there are some work you might be interested in：
 

@@ -127,8 +127,8 @@ if __name__ == "__main__":
         "--output_dir", "-o", type=str, default="outputs", help="output directory"
     )
 
-    parser.add_argument("--box_threshold", type=float, default=0.15, help="box threshold")
-    parser.add_argument("--text_threshold", type=float, default=0.15, help="text threshold")
+    parser.add_argument("--box_threshold", type=float, default=0.2, help="box threshold")
+    parser.add_argument("--text_threshold", type=float, default=0.2, help="text threshold")
     parser.add_argument("--area_threshold", type=float, default=0.9, help="defect area threshold")
 
     parser.add_argument("--device", type=str, default="cuda", help="running on cpu only!, default=False")
