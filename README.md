@@ -109,14 +109,12 @@ python gradio_zero_shot_ad_app.py
 - The gradio app visulization as follow:
 ![](./assets/gradio.png)
 
-## 💘 Acknowledgements
-
 ## :hammer:Todolist
 We will add following features in the near future...
 - [x] Detail the zero-shot anomaly detection framework.
 - [ ] Evaluate on other image anomaly detection datasets.
 - [ ] Add video demo.
-- [ ] Add UI for easy evaluation.
+- [x] Add UI for easy evaluation.
 - [ ] Colab demo.
 - [ ] HuggingFace demo.
 
