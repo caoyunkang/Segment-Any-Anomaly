@@ -130,6 +130,7 @@ We will add following features in the near future...
 
 If you feel good about our work, there are some work you might be interested in：
 
+- [Awesome-segment-anything-extensions](https://github.com/JerryX1110/awesome-segment-anything-extensions)
 - [IKD, image anomaly detection](https://github.com/caoyunkang/IKD)
 - [CDO, image anomaly detection](https://github.com/caoyunkang/CDO)
 - [PFM, image anomaly detection](https://github.com/smiler96/PFM-and-PEFM-for-Image-Anomaly-Detection-and-Segmentation)
