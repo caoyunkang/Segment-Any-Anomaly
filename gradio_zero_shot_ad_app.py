@@ -10,8 +10,8 @@ import torch
 from PIL import Image, ImageDraw, ImageFont
 
 import sys
-sys.path.append("/home/duzongwei/WorkPlace/GroundedSAM-zero-shot-anomaly-detection/GroundingDINO")
-sys.path.append("/home/duzongwei/WorkPlace/GroundedSAM-zero-shot-anomaly-detection/SAM")
+# sys.path.append("/home/duzongwei/WorkPlace/GroundedSAM-zero-shot-anomaly-detection/GroundingDINO")
+# sys.path.append("/home/duzongwei/WorkPlace/GroundedSAM-zero-shot-anomaly-detection/SAM")
 
 # Grounding DINO
 import GroundingDINO.groundingdino.datasets.transforms as T

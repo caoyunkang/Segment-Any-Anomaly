@@ -104,9 +104,8 @@ python gradio_zero_shot_ad_app.py
 - The gradio app visulization as follow:
   ![](./assets/gradio.png)
 
-## 💘 Acknowledgements
 
-## 🔨Todolist
+## :hammer:Todolist
 
 We will add following features in the near future...
 
