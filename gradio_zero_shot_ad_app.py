@@ -4,14 +4,12 @@ from huggingface_hub import hf_hub_download
 import argparse
 import os
 import copy
+import sys
 
 import numpy as np
 import torch
 from PIL import Image, ImageDraw, ImageFont
 
-import sys
-# sys.path.append("/home/duzongwei/WorkPlace/GroundedSAM-zero-shot-anomaly-detection/GroundingDINO")
-# sys.path.append("/home/duzongwei/WorkPlace/GroundedSAM-zero-shot-anomaly-detection/SAM")
 
 # Grounding DINO
 import GroundingDINO.groundingdino.datasets.transforms as T
@@ -176,16 +174,10 @@ def show_box(box, ax, label):
 def run_grounded_sam(image_path, text_prompt, task_type, box_threshold, text_threshold, area_threshold):
     assert text_prompt, 'text_prompt is not found!'
 
-    # make dir
-    os.makedirs(output_dir, exist_ok=True)
     # load image
     image_pil, image = load_image(image_path.convert("RGB"))
     # load model
     model = load_model_hf(config_file, ckpt_repo_id, ckpt_filenmae)
-
-    # visualize raw image
-    image_pil.save(os.path.join(output_dir, "raw_image.jpg"))
-
     # run grounding dino model
     boxes_filt, pred_phrases = get_grounding_output(
         model, image, text_prompt, box_threshold, text_threshold, area_threshold, device=device
@@ -220,30 +212,33 @@ def run_grounded_sam(image_path, text_prompt, task_type, box_threshold, text_thr
     if task_type == 'det':
         pred_dict = {
             "boxes": boxes_filt,
-            "size": [size[1], size[0]],  # H,W
+            "size": [size[1], size[0]],  # H, W
             "labels": pred_phrases,
         }
-        # import ipdb; ipdb.set_trace()
-        image_with_box = plot_boxes_to_image(image_pil, pred_dict)[0]
-        image_path = os.path.join(output_dir, "grounding_dino_output.jpg")
-        image_with_box.save(image_path)
-        image_result = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
-        return image_result
+        image_pil = plot_boxes_to_image(image_pil, pred_dict)[0]
+        return image_pil
+
     elif task_type == 'seg':
         assert sam_checkpoint, 'sam_checkpoint is not found!'
 
         # draw output image
-        plt.figure(figsize=(10, 10))
+        fig = plt.figure(figsize=(size[0] / 100, size[1] / 100))
         plt.imshow(image)
         for mask in masks:
             show_mask(mask.cpu().numpy(), plt.gca(), random_color=True)
         for box, label in zip(boxes_filt, pred_phrases):
             show_box(box.numpy(), plt.gca(), label)
         plt.axis('off')
-        image_path = os.path.join(output_dir, "grounding_dino_output.jpg")
-        plt.savefig(image_path, bbox_inches="tight")
-        image_result = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
-        return image_result
+
+        # move the white margin
+        plt.subplots_adjust(top=1, bottom=0, right=1, left=0, hspace=0, wspace=0)
+        plt.margins(0, 0)
+
+        # plt.figure -> pil
+        fig.canvas.draw()
+        w, h = fig.canvas.get_width_height()
+        image_pil = Image.frombytes('RGB', (w, h), fig.canvas.tostring_rgb())
+        return image_pil
 
 
 if __name__ == "__main__":
@@ -273,8 +268,10 @@ if __name__ == "__main__":
                     )
 
             with gr.Column():
-                gallery = gr.outputs.Image(
+                gallery = gr.Image(
                     type="pil",
+                    label="Result",
+                    tool="select"
                 ).style(full_width=True, full_height=True)
 
         run_button.click(fn=run_grounded_sam, inputs=[
