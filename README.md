@@ -32,7 +32,9 @@ Some possible avenues for future work ...
 
 ## 🔥 What's New
 
-- 🆕 Show the way of using anomaly specific prompts to detect anomalies more precise.
+- 🆕 We have added a [colab demo](https://colab.research.google.com/drive/1Rwio_KfziuLp79Qh_ugum64Hjnq4ZwsE?usp=sharing), enjoy it~
+- 🆕 We have added a [gradio app](./gradio_zero_shot_ad_app.py), enjoy it~
+- 🆕 Show the way of using anomaly specific prompts to detect anomalies more precise. For example, using text_prompt like "the black hole on the cable".
 
 ## 🛠 Installation
 
@@ -81,12 +83,13 @@ export CUDA_VISIBLE_DEVICES=0
 python zero_shot_ad_demo.py \
   --config GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py \
   --grounded_checkpoint weights/groundingdino_swint_ogc.pth \
+  --category "cable" \
   --input_image assets/wood_demo.png \
   --output_dir "outputs" \
-  --box_threshold 0.15 \
-  --text_threshold 0.15 \
-  --area_threshold 0.70 \
-  --text_prompt "defects" \
+  --box_threshold 0.20 \
+  --text_threshold 0.20 \
+  --area_threshold 0.90 \
+  --text_prompt "the black hole on the cable" \
   --device "cuda"
 ```
 
@@ -110,7 +113,7 @@ We will add following features in the near future...
 - [ ] Evaluate on other image anomaly detection datasets.
 - [ ] Add video demo.
 - [X] Add UI for easy evaluation.
-- [ ] Colab demo.
+- [x] Colab demo.
 - [ ] HuggingFace demo.
 
 ## 💘 Acknowledgements
