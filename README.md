@@ -84,7 +84,7 @@ python zero_shot_ad_demo.py \
   --config GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py \
   --grounded_checkpoint weights/groundingdino_swint_ogc.pth \
   --category "cable" \
-  --input_image assets/wood_demo.png \
+  --input_image assets/cable_demo.png \
   --output_dir "outputs" \
   --box_threshold 0.20 \
   --text_threshold 0.20 \
