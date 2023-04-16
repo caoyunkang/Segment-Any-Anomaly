@@ -220,6 +220,7 @@ def run_grounded_sam(image_pil, text_prompt, task_type, box_threshold, text_thre
 
 
 if __name__ == "__main__":
+
     os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
     parser = argparse.ArgumentParser("Grounded SAM demo", add_help=True)
