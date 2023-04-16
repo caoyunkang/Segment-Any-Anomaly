@@ -1,15 +1,10 @@
 import gradio as gr
-from huggingface_hub import hf_hub_download
-
 import argparse
 import os
-import copy
-import sys
 
 import numpy as np
 import torch
 from PIL import Image, ImageDraw, ImageFont
-
 
 # Grounding DINO
 import GroundingDINO.groundingdino.datasets.transforms as T
@@ -24,27 +19,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-config_file = 'GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py'
-ckpt_repo_id = "ShilongLiu/GroundingDINO"
-ckpt_filenmae = "groundingdino_swint_ogc.pth"
-sam_checkpoint='weights/sam_vit_h_4b8939.pth' 
-output_dir="outputs"
-device="cuda"
-
-
-def load_model_hf(model_config_path, repo_id, filename, device='cpu'):
-    # load the DINO model
-    args = SLConfig.fromfile(model_config_path) 
-    model = build_model(args)
-    args.device = device
-
-    cache_file = hf_hub_download(repo_id=repo_id, filename=filename)
-    checkpoint = torch.load(cache_file, map_location='cpu')
-    log = model.load_state_dict(clean_state_dict(checkpoint['model']), strict=False)
-    print("Model loaded from {} \n => {}".format(cache_file, log))
-    _ = model.eval()
-    return model
 
 def plot_boxes_to_image(image_pil, tgt):
     H, W = tgt["size"]
@@ -86,11 +60,8 @@ def plot_boxes_to_image(image_pil, tgt):
 
     return image_pil, mask
 
-def load_image(image_path):
-    # # load image
-    # image_pil = Image.open(image_path).convert("RGB")  # load image
-    image_pil = image_path
-
+def load_image(image_pil):
+    # load image
     transform = T.Compose(
         [
             T.RandomResize([800], max_size=1333),
@@ -113,7 +84,7 @@ def load_model(model_config_path, model_checkpoint_path, device):
     return model
 
 
-def get_grounding_output(model, image, caption, box_threshold, text_threshold, area_threshold, with_logits=True, device="cpu"):
+def get_grounding_output(model, image, caption, box_threshold, text_threshold, area_threshold, category, with_logits=True, device="cpu"):
     caption = caption.lower()
     caption = caption.strip()
     if not caption.endswith("."):
@@ -124,7 +95,6 @@ def get_grounding_output(model, image, caption, box_threshold, text_threshold, a
         outputs = model(image[None], captions=[caption])
     logits = outputs["pred_logits"].cpu().sigmoid()[0]  # (nq, 256)
     boxes = outputs["pred_boxes"].cpu()[0]  # (nq, 4)
-    logits.shape[0]
 
     # filter output
     logits_filt = logits.clone()
@@ -143,16 +113,24 @@ def get_grounding_output(model, image, caption, box_threshold, text_threshold, a
     # get phrase
     tokenlizer = model.tokenizer
     tokenized = tokenlizer(caption)
+
     # build pred
     pred_phrases = []
+    boxes_filt_category = []
     for logit, box in zip(logits_filt, boxes_filt):
         pred_phrase = get_phrases_from_posmap(logit > text_threshold, tokenized, tokenlizer)
+        if pred_phrase.count(category) > 0: # we don't want to predict the category
+            continue
+
         if with_logits:
             pred_phrases.append(pred_phrase + f"({str(logit.max().item())[:4]})")
         else:
             pred_phrases.append(pred_phrase)
+        boxes_filt_category.append(box)
+    boxes_filt_category = torch.stack(boxes_filt_category, dim=0)
 
-    return boxes_filt, pred_phrases
+    return boxes_filt_category, pred_phrases
+
 
 def show_mask(mask, ax, random_color=False):
     if random_color:
@@ -171,16 +149,16 @@ def show_box(box, ax, label):
     ax.text(x0, y0, label)
 
 
-def run_grounded_sam(image_path, text_prompt, task_type, box_threshold, text_threshold, area_threshold):
+def run_grounded_sam(image_pil, text_prompt, task_type, box_threshold, text_threshold, area_threshold, category):
     assert text_prompt, 'text_prompt is not found!'
 
     # load image
-    image_pil, image = load_image(image_path.convert("RGB"))
-    # load model
-    model = load_model_hf(config_file, ckpt_repo_id, ckpt_filenmae)
+    image_pil, image = load_image(image_pil.convert("RGB"))
+    # load dino model
+    model = load_model(config_file, grounded_checkpoint, device=device)
     # run grounding dino model
     boxes_filt, pred_phrases = get_grounding_output(
-        model, image, text_prompt, box_threshold, text_threshold, area_threshold, device=device
+        model, image, text_prompt, box_threshold, text_threshold, area_threshold, category=category, device=device
     )
 
     size = image_pil.size
@@ -188,7 +166,7 @@ def run_grounded_sam(image_path, text_prompt, task_type, box_threshold, text_thr
     if task_type == 'seg' or task_type == 'inpainting':
         # initialize SAM
         predictor = SamPredictor(build_sam(checkpoint=sam_checkpoint))
-        image = np.array(image_path)
+        image = np.array(image_pil)
         predictor.set_image(image)
 
         H, W = size[1], size[0]
@@ -242,11 +220,18 @@ def run_grounded_sam(image_path, text_prompt, task_type, box_threshold, text_thr
 
 
 if __name__ == "__main__":
+    os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
     parser = argparse.ArgumentParser("Grounded SAM demo", add_help=True)
     parser.add_argument("--debug", action="store_true", help="using debug mode")
     parser.add_argument("--share", action="store_true", help="share the app")
     args = parser.parse_args()
+
+    config_file = 'GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py'
+    grounded_checkpoint = "weights/groundingdino_swint_ogc.pth"
+    sam_checkpoint = 'weights/sam_vit_h_4b8939.pth' 
+    output_dir = "outputs"
+    device ="cuda"
 
     block = gr.Blocks().queue()
     with block:
@@ -255,6 +240,7 @@ if __name__ == "__main__":
                 input_image = gr.Image(source='upload', type="pil")
                 text_prompt = gr.Textbox(label="Detection Prompt")
                 task_type = gr.Textbox(label="task type: det/seg")
+                category_type = gr.Textbox(label="Background: to be filtered")
                 run_button = gr.Button(label="Run")
                 with gr.Accordion("Advanced options", open=True):
                     box_threshold = gr.Slider(
@@ -275,7 +261,7 @@ if __name__ == "__main__":
                 ).style(full_width=True, full_height=True)
 
         run_button.click(fn=run_grounded_sam, inputs=[
-                        input_image, text_prompt, task_type, box_threshold, text_threshold, area_threshold], outputs=[gallery])
+                        input_image, text_prompt, task_type, box_threshold, text_threshold, area_threshold, category_type], outputs=[gallery])
 
 
-    block.launch(server_name='0.0.0.0', server_port=8000, debug=args.debug, share=args.share)
+        block.launch(server_name='0.0.0.0', server_port=8000, debug=args.debug, share=args.share)
