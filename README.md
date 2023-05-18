@@ -1,4 +1,4 @@
-![](./assets/SegmentAnyAnomaly_logo.png)
+[comment]: <> (![]&#40;./assets/SegmentAnyAnomaly_logo.png&#41;)
 
 # GroundedSAM-zero-shot-anomaly-detection
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Rwio_KfziuLp79Qh_ugum64Hjnq4ZwsE?usp=sharing)
@@ -32,6 +32,7 @@ Some possible avenues for future work ...
 
 ## 🔥 What's New
 
+- 🆕 We have proposed Segment Any Anomaly without Training via Hybrid Prompt Regularizati. The code will be released soon~
 - 🆕 We have added a [colab demo](https://colab.research.google.com/drive/1Rwio_KfziuLp79Qh_ugum64Hjnq4ZwsE?usp=sharing), enjoy it~
 - 🆕 We have added a [gradio app](./gradio_zero_shot_ad_app.py), enjoy it~
 - 🆕 Show the way of using anomaly specific prompts to detect anomalies more precise. For example, using text_prompt like "the black hole on the cable".
