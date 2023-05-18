@@ -1,6 +1,6 @@
 [comment]: <> (![]&#40;./assets/SegmentAnyAnomaly_logo.png&#41;)
 
-# GroundedSAM-zero-shot-anomaly-detection
+# Segment Any Anomaly
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Rwio_KfziuLp79Qh_ugum64Hjnq4ZwsE?usp=sharing)
 
 This project aims to segment any anomaly without any training. We develop this interesting demo by combining [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and [Segment Anything](https://github.com/facebookresearch/segment-anything)!
