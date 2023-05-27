@@ -80,7 +80,7 @@ python run_MTD.py
 
 ## Performance
 ![](./assets/results.png)
-
+![](./assets/qualitative_results.png)
 ## What's New
 
 
