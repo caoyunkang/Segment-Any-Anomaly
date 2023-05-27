@@ -1,45 +1,47 @@
 # Segment Any Anomaly
-This repo is the official implementation of 
-[Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
 
-SAA+ aims to segment any anomaly without any training. We meet this expectation by adapting existing foundation models, 
-i.e., [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and 
+This repository contains the official implementation of [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
+
+SAA+ aims to segment any anomaly without the need for training. We achieve this by adapting existing foundation models, 
+namely [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and 
 [Segment Anything](https://github.com/facebookresearch/segment-anything), with hybrid prompt regularization.
 
 ## Framework
-We found the simple assemble of foundation models suffer from severe language ambiguity. Hence, we introduce hybrid prompts
-derived from domain expert knowledge and target image context to alleviate the language ambiguity, as follows.
+We found that a simple assembly of foundation models suffers from severe language ambiguity. 
+Therefore, we introduce hybrid prompts derived from domain expert knowledge and target image context to alleviate the language ambiguity. 
+The framework is illustrated below:
 
-![](./assets/framework.png)
+![Framework](./assets/framework.png)
 
 ## Quick Start
 
 ### Dataset Preparation
 
-We evaluate SAA+ on four public datasets, including MVTec-AD, VisA, KSDD2, and MTD. In addition, SAA+ was a winner team
-in [VAND workshop](https://sites.google.com/view/vand-cvpr23/challenge), which offers a specified dataset, i.e., VisA-Challenge. 
-Please consider to prepare the datasets according to following instructions.
+We evaluate SAA+ on four public datasets: MVTec-AD, VisA, KSDD2, and MTD. 
+Additionally, SAA+ was a winning team in the [VAND workshop](https://sites.google.com/view/vand-cvpr23/challenge), 
+which offers a specified dataset, VisA-Challenge. To prepare the datasets, please follow the instructions below:
 
-By default, we save the data in ``../datasets``. 
+By default, we save the data in the `../datasets` directory.
 
-```
+```bash
 cd $ProjectRoot # e.g., /home/SAA
 cd ..
 mkdir datasets
 cd datasets
 ```
 
-Then following the corresponding instructions to prepare individual datasets.
+Then, follow the corresponding instructions to prepare individual datasets:
+
 - [MVTec-AD](https://www.mvtec.com/company/research/datasets/mvtec-ad/)
 - [VisA-Public](https://github.com/search?q=spot+the+difference&type=repositories)
 - [VisA-Challenge](https://codalab.lisn.upsaclay.fr/competitions/12499)
 - [KSDD2](https://www.vicos.si/resources/kolektorsdd2/)
 - [MTD](https://github.com/abin24/Magnetic-tile-defect-datasets.)
 
-
 ### Environment Setup
-You can simply use our script one-click setup environment and download the checkpoints.
-```
+You can use our script for one-click setup of the environment and downloading the checkpoints.
+
+```bash
 cd $ProjectRoot
 bash install.sh
 ```
@@ -48,51 +50,50 @@ bash install.sh
 
 **MVTec-AD**
 
-``
+```bash
 python run_MVTec.py
-``
+```
 
 **VisA-Public**
 
-``
+```bash
 python run_VisA_public.py
-``
+```
 
 **VisA-Challenge**
 
-``
+```bash
 python run_VAND_workshop.py
-``
+```
 
-The submission files can be found in ``./result_VAND_workshop/visa_challenge-k-0/0shot``.
+The submission files can be found in `./result_VAND_workshop/visa_challenge-k-0/0shot`.
 
 **KSDD2**
 
-``
+```bash
 python run_KSDD2.py
-``
+```
 
 **MTD**
 
-``
+```bash
 python run_MTD.py
-``
+```
 
 ## Performance
-![](./assets/results.png)
-![](./assets/qualitative_results.png)
+![Results](./assets/results.png)
+![Qualitative Results](./assets/qualitative_results.png)
+
 ## What's New
 
-
-- We have updated this repo for SAA+.
+- We have updated this repository for SAA+.
 - We have published [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
 
+## :hammer: Todo List
 
-## :hammer:Todolist
+We have planned the following features to be added in the near future:
 
-We will add following features in the near future...
-
-- [x] Update repo for SAA+
+- [x] Update repository for SAA+
 - [X] Detail the zero-shot anomaly detection framework.
 - [x] Evaluate on other image anomaly detection datasets.
 - [ ] Add UI for easy evaluation.
