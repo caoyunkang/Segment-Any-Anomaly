@@ -17,7 +17,7 @@ if __name__ == '__main__':
                         f'--class-name {cls} ' \
                         f'--batch-size {1} ' \
                         f'--root-dir ./result_mvtec ' \
-                        f'--cal-pro True ' \
+                        f'--cal-pro False ' \
                         f'--gpu-id {gpu_indx} ' \
 
             print(sh_method)
