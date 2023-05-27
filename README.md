@@ -102,7 +102,7 @@ We will add following features in the near future...
 ## 💘 Acknowledgements
 Our work is largely inspired by the following projects. Thanks for their admiring contribution.
 
-- [WinClip]()
+- [WinClip](https://github.com/caoyunkang/WinClip)
 - [segment-anything](https://github.com/facebookresearch/segment-anything)
 - [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything)
