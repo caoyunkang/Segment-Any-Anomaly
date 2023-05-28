@@ -59,6 +59,6 @@ if __name__ == '__main__':
     plt.imshow(image_show)
     plt.imshow(similarity_map, alpha=0.4, cmap='jet')
     plt.title('Saliency')
-
-    plt.savefig(os.path.join(root_dir, 'result_image.png'))
+    plt.show()
+    # plt.savefig(os.path.join(root_dir, 'result_image.png'))
 
