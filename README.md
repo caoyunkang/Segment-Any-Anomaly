@@ -1,4 +1,5 @@
 # Segment Any Anomaly
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/12Sh0j92YYmTa0oIuSEWWpPBCpIwCSVhz?usp=sharing)
 
 This repository contains the official implementation of [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
 
@@ -107,7 +108,7 @@ We have planned the following features to be added in the near future:
 - [X] Detail the zero-shot anomaly detection framework.
 - [x] Evaluate on other image anomaly detection datasets.
 - [ ] Add UI for easy evaluation.
-- [ ] Update Colab demo.
+- [x] Update Colab demo.
 - [ ] HuggingFace demo.
 
 ## 💘 Acknowledgements
