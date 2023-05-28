@@ -7,6 +7,13 @@ SAA+ aims to segment any anomaly without the need for training. We achieve this 
 namely [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and 
 [Segment Anything](https://github.com/facebookresearch/segment-anything), with hybrid prompt regularization.
 
+## :fire:What's New
+
+- We have updated the [colab demo](https://colab.research.google.com/drive/12Sh0j92YYmTa0oIuSEWWpPBCpIwCSVhz?usp=sharing). Enjoy it~
+- We have updated this repository for SAA+.
+- We have published [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
+
+
 ## :gem:Framework
 We found that a simple assembly of foundation models suffers from severe language ambiguity. 
 Therefore, we introduce hybrid prompts derived from domain expert knowledge and target image context to alleviate the language ambiguity. 
@@ -95,10 +102,6 @@ python demo.py
 ![Results](./assets/results.png)
 ![Qualitative Results](./assets/qualitative_results.png)
 
-## :fire:What's New
-
-- We have updated this repository for SAA+.
-- We have published [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
 
 ## :hammer: Todo List
 
