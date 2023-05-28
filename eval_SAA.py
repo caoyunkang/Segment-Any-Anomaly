@@ -185,9 +185,9 @@ def str2bool(v):
 def get_args():
     parser = argparse.ArgumentParser(description='Anomaly detection')
     # data related parameters
-    parser.add_argument('--dataset', type=str, default='visa_public',
+    parser.add_argument('--dataset', type=str, default='mvtec',
                         choices=['mvtec', 'visa_challenge', 'visa_public', 'ksdd2', 'mtd'])
-    parser.add_argument('--class-name', type=str, default='pcb4')
+    parser.add_argument('--class-name', type=str, default='metal_nut')
     parser.add_argument('--k-shot', type=int, default=0)
 
     # experiment related parameters

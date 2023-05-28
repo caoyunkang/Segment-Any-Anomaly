@@ -1,8 +1,8 @@
-from .parameters_table.general_prompts import build_general_prompts
-from .parameters_table import visa_parameters
-from .parameters_table import mvtec_parameters
-from .parameters_table import ksdd2_parameters
-from .parameters_table import mtd_parameters
+from .prompts.general_prompts import build_general_prompts
+from .prompts import visa_parameters
+from .prompts import mvtec_parameters
+from .prompts import ksdd2_parameters
+from .prompts import mtd_parameters
 
 
 manul_prompts = {
