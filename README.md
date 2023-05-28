@@ -6,7 +6,7 @@ SAA+ aims to segment any anomaly without the need for training. We achieve this 
 namely [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and 
 [Segment Anything](https://github.com/facebookresearch/segment-anything), with hybrid prompt regularization.
 
-## Framework
+## :gem:Framework
 We found that a simple assembly of foundation models suffers from severe language ambiguity. 
 Therefore, we introduce hybrid prompts derived from domain expert knowledge and target image context to alleviate the language ambiguity. 
 The framework is illustrated below:
@@ -15,7 +15,7 @@ The framework is illustrated below:
 
 ## Quick Start
 
-### Dataset Preparation
+### :bank:Dataset Preparation
 
 We evaluate SAA+ on four public datasets: MVTec-AD, VisA, KSDD2, and MTD. 
 Additionally, SAA+ was a winning team in the [VAND workshop](https://sites.google.com/view/vand-cvpr23/challenge), 
@@ -38,7 +38,7 @@ Then, follow the corresponding instructions to prepare individual datasets:
 - [KSDD2](https://www.vicos.si/resources/kolektorsdd2/)
 - [MTD](https://github.com/abin24/Magnetic-tile-defect-datasets.)
 
-### Environment Setup
+### :hammer:Environment Setup
 You can use our script for one-click setup of the environment and downloading the checkpoints.
 
 ```bash
@@ -46,7 +46,7 @@ cd $ProjectRoot
 bash install.sh
 ```
 
-### Repeat the public results
+### :page_facing_up:Repeat the public results
 
 **MVTec-AD**
 
@@ -80,11 +80,11 @@ python run_KSDD2.py
 python run_MTD.py
 ```
 
-## Performance
+## :dart:Performance
 ![Results](./assets/results.png)
 ![Qualitative Results](./assets/qualitative_results.png)
 
-## What's New
+## :fire:What's New
 
 - We have updated this repository for SAA+.
 - We have published [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
@@ -108,6 +108,28 @@ Our work is largely inspired by the following projects. Thanks for their admirin
 - [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything)
 
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/caoyunkang/Segment-Any-Anomaly.svg)](https://starchart.cc/caoyunkang/Segment-Any-Anomaly)
+
+<br>
+<p align="center">Feel free to ask any questions, open a PR if you feel something can be done differently!</p >
+<h2 align="center">Star this repository</h2>
+<p align="center">Created by Charmve &  Community | Deployed on </p >
+
+<br>
+* <i>Update on Sep 17, 2021 @, 
+    <a class="github-button"
+        href="https://github.com/caoyunkang/Segment-Any-Anomaly"
+        data-icon="octicon-star" data-show-count="true"
+        aria-label="Star Charmve/Surface-Defect-Detection on GitHub">Star</a > 
+    and 
+    <a class="github-button"
+        href="https://github.com/caoyunkang/Segment-Any-Anomaly/fork"
+        data-icon="octicon-repo-forked" data-show-count="true"
+        aria-label="Fork Charmve/Surface-Defect-Detection on GitHub">Fork</a >
+</i>
 
 ## Citation
 
