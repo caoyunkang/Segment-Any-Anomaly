@@ -74,7 +74,7 @@ manual_prompts = {
 }
 
 property_prompts = {
-    'carpet': 'the image of cashew have 1 dissimilar carpet, with a maximum of 5 anomaly. The anomaly would not exceed 0.9 object area. ',
+    'carpet': 'the image of carpet have 1 dissimilar carpet, with a maximum of 5 anomaly. The anomaly would not exceed 0.9 object area. ',
     'grid': 'the image of grid have 1 dissimilar grid, with a maximum of 5 anomaly. The anomaly would not exceed 0.9 object area. ',
     'leather': 'the image of leather have 1 dissimilar leather, with a maximum of 5 anomaly. The anomaly would not exceed 0.9 object area. ',
     'tile': 'the image of tile have 1 dissimilar tile, with a maximum of 5 anomaly. The anomaly would not exceed 0.9 object area. ',
