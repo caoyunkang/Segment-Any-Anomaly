@@ -80,6 +80,16 @@ python run_KSDD2.py
 python run_MTD.py
 ```
 
+### :page_facing_up:Demo Results
+
+Run following command for demo results
+
+```bash
+python demo.py
+```
+
+![Demo](./assets/demo_result.png)
+
 ## :dart:Performance
 ![Results](./assets/results.png)
 ![Qualitative Results](./assets/qualitative_results.png)
