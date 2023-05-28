@@ -113,23 +113,6 @@ Our work is largely inspired by the following projects. Thanks for their admirin
 
 [![Stargazers over time](https://starchart.cc/caoyunkang/Segment-Any-Anomaly.svg)](https://starchart.cc/caoyunkang/Segment-Any-Anomaly)
 
-<br>
-<p align="center">Feel free to ask any questions, open a PR if you feel something can be done differently!</p >
-<h2 align="center">Star this repository</h2>
-<p align="center">Created by Charmve &  Community | Deployed on </p >
-
-<br>
-* <i>Update on Sep 17, 2021 @, 
-    <a class="github-button"
-        href="https://github.com/caoyunkang/Segment-Any-Anomaly"
-        data-icon="octicon-star" data-show-count="true"
-        aria-label="Star Charmve/Surface-Defect-Detection on GitHub">Star</a > 
-    and 
-    <a class="github-button"
-        href="https://github.com/caoyunkang/Segment-Any-Anomaly/fork"
-        data-icon="octicon-repo-forked" data-show-count="true"
-        aria-label="Fork Charmve/Surface-Defect-Detection on GitHub">Fork</a >
-</i>
 
 ## Citation
 
