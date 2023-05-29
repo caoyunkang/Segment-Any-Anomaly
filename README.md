@@ -1,6 +1,6 @@
 # Segment Any Anomaly
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/12Sh0j92YYmTa0oIuSEWWpPBCpIwCSVhz?usp=sharing)
-
+[![HuggingFace Space](https://img.shields.io/badge/🤗-HuggingFace%20Space-cyan.svg)](https://huggingface.co/spaces/Caoyunkang/Segment-Any-Anomaly)
 This repository contains the official implementation of [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
 
 SAA+ aims to segment any anomaly without the need for training. We achieve this by adapting existing foundation models, 
@@ -9,6 +9,7 @@ namely [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO) and
 
 ## :fire:What's New
 
+- We have added a [Huggingface demo](https://huggingface.co/spaces/Caoyunkang/Segment-Any-Anomaly). Enjoy it~
 - We have updated the [colab demo](https://colab.research.google.com/drive/12Sh0j92YYmTa0oIuSEWWpPBCpIwCSVhz?usp=sharing). Enjoy it~
 - We have updated this repository for SAA+.
 - We have published [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
@@ -110,9 +111,9 @@ We have planned the following features to be added in the near future:
 - [x] Update repository for SAA+
 - [X] Detail the zero-shot anomaly detection framework.
 - [x] Evaluate on other image anomaly detection datasets.
-- [ ] Add UI for easy evaluation.
+- [x] Add UI for easy evaluation.
 - [x] Update Colab demo.
-- [ ] HuggingFace demo.
+- [x] HuggingFace demo.
 
 ## 💘 Acknowledgements
 Our work is largely inspired by the following projects. Thanks for their admiring contribution.
