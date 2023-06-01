@@ -188,14 +188,14 @@ def get_args():
     parser.add_argument('--dataset', type=str, default='mvtec',
                         choices=['mvtec', 'visa_challenge', 'visa_public', 'ksdd2', 'mtd'])
     parser.add_argument('--class-name', type=str, default='metal_nut')
-    parser.add_argument('--k-shot', type=int, default=0)
+    parser.add_argument('--k-shot', type=int, default=0) # no effect... just set it to 0.
 
     # experiment related parameters
     parser.add_argument('--batch-size', type=int, default=1)
     parser.add_argument('--vis', type=str2bool, choices=[True, False], default=True)
     parser.add_argument("--root-dir", type=str, default="./result")
     parser.add_argument("--cal-pro", type=str2bool, default=False)
-    parser.add_argument("--experiment_indx", type=int, default=0)
+    parser.add_argument("--experiment_indx", type=int, default=0) # no effect... just set it to 0.
     parser.add_argument("--gpu-id", type=int, default=0)
     parser.add_argument("--use-cpu", type=int, default=0)
 
