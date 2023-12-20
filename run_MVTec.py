@@ -6,7 +6,7 @@ if __name__ == '__main__':
 
     pool = Pool(processes=1)
 
-    dataset_list = ['mvtec']
+    dataset_list = ['visa_public', 'mvtec']
     gpu_indx = 0
 
     for dataset in dataset_list:
@@ -16,8 +16,8 @@ if __name__ == '__main__':
                         f'--dataset {dataset} ' \
                         f'--class-name {cls} ' \
                         f'--batch-size {1} ' \
-                        f'--root-dir ./result_mvtec ' \
-                        f'--cal-pro False ' \
+                        f'--root-dir ./result ' \
+                        f'--cal-pro True ' \
                         f'--gpu-id {gpu_indx} ' \
 
             print(sh_method)

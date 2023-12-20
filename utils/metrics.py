@@ -1,9 +1,7 @@
 import numpy as np
 from skimage import measure
-from sklearn.metrics import auc
-from sklearn.metrics import precision_recall_curve
-from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score, precision_recall_curve, average_precision_score, auc
 
 def calculate_max_f1(gt, scores):
     precision, recall, thresholds = precision_recall_curve(gt, scores)
@@ -32,20 +30,35 @@ def metric_cal(scores, gt_list, gt_mask_list, cal_pro=False):
     fpr, tpr, _ = roc_curve(gt_mask.flatten(), scores.flatten())
     per_pixel_rocauc = roc_auc_score(gt_mask.flatten(), scores.flatten())
 
+    ##############
+
+    ap_im = average_precision_score(gt_list, img_scores)
+    ap_px = average_precision_score(gt_mask.flatten(), scores.flatten())
+
 
     # calculate max-f1 region
     if cal_pro:
-        # pro_auc_score = cal_pro_metric(gt_mask_list, scores, fpr_thresh=0.3)
+        pro_auc_score = cal_pro_metric(gt_mask_list, scores, fpr_thresh=0.3)
         # calculate max-f1 region
-        max_f1_region = calculate_max_f1_region(gt_mask_list, scores)
+        # max_f1_region = calculate_max_f1_region(gt_mask_list, scores)
 
     else:
+        pro_auc_score = 0
         # pro_auc_score = 0
         # calculate max-f1 region
         max_f1_region = 0
 
-    result_dict = {'i_roc': img_roc_auc * 100, 'p_roc': per_pixel_rocauc * 100,
-     'i_f1': img_f1 * 100, 'i_thresh': img_threshold, 'p_f1': pxl_f1 * 100, 'p_thresh': pxl_threshold, 'r_f1': max_f1_region * 100}
+    result_dict = {
+        'i_roc': img_roc_auc * 100,
+        'p_roc': per_pixel_rocauc * 100,
+        'i_ap': ap_im * 100,
+        'p_ap': ap_px * 100,
+        'i_f1': img_f1 * 100,
+        # 'i_thresh': img_threshold,
+        'p_f1': pxl_f1 * 100,
+        # 'p_thresh': pxl_threshold,
+        'p_pro': pro_auc_score * 100,
+    }
 
     return result_dict
 
@@ -58,7 +71,7 @@ def cal_pro_metric(labeled_imgs, score_imgs, fpr_thresh=0.3, max_steps=200):
     labeled_imgs = np.array(labeled_imgs)
     labeled_imgs[labeled_imgs <= 0.45] = 0
     labeled_imgs[labeled_imgs > 0.45] = 1
-    labeled_imgs = labeled_imgs.astype(np.bool)
+    labeled_imgs = labeled_imgs.astype(bool)
 
     max_th = score_imgs.max()
     min_th = score_imgs.min()

@@ -16,8 +16,8 @@ if __name__ == '__main__':
                         f'--dataset {dataset} ' \
                         f'--class-name {cls} ' \
                         f'--batch-size {1} ' \
-                        f'--root-dir ./result_VisA_public ' \
-                        f'--cal-pro False ' \
+                        f'--root-dir ./result ' \
+                        f'--cal-pro True ' \
                         f'--gpu-id {gpu_indx} ' \
 
             print(sh_method)

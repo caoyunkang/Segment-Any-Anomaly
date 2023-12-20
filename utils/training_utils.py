@@ -32,7 +32,7 @@ def setup_seed(seed):
 
 def get_dir_from_args(root_dir, class_name, **kwargs):
 
-    exp_name = f"{kwargs['dataset']}-k-{kwargs['k_shot']}"
+    exp_name = f"{kwargs['dataset']}"
 
     csv_dir = os.path.join(root_dir, 'csv')
     csv_path = os.path.join(csv_dir, f"{exp_name}-indx-{kwargs['experiment_indx']}.csv")
