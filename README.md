@@ -2,6 +2,9 @@
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/12Sh0j92YYmTa0oIuSEWWpPBCpIwCSVhz?usp=sharing)
 [![HuggingFace Space](https://img.shields.io/badge/🤗-HuggingFace%20Space-cyan.svg)](https://huggingface.co/spaces/Caoyunkang/Segment-Any-Anomaly)
 
+📢 **Latest News**  
+🌟 Our paper has been officially accepted by **IEEE Transactions on Cybernetics**! Check out the [formal publication](https://ieeexplore.ieee.org/document/10884560).
+
 This repository contains the official implementation of [Segment Any Anomaly without Training via Hybrid Prompt Regularization, SAA+](http://arxiv.org/abs/2305.10724).
 
 SAA+ aims to segment any anomaly without the need for training. We achieve this by adapting existing foundation models, 
